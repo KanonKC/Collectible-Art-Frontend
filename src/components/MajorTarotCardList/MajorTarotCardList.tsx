@@ -30,7 +30,7 @@ const MajorTarotCardList = ({
 	).slice(startCardNumber, endCardNumber + 1);
 
 	return (
-		<div className="card-list-container">
+		<div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
 			{majorCards.map((number) => (
 				<TarotCard
 					key={number}
