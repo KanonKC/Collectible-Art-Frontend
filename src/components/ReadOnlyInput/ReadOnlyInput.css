@@ -1,0 +1,19 @@
+.read-only-input {
+    display: flex;
+    position: static;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    position: relative;
+    /* margin-right: 65px; */
+    right: 75px;
+    /* border: 1px solid red; */
+}
+
+.button-group-icon {
+    cursor: pointer;
+}

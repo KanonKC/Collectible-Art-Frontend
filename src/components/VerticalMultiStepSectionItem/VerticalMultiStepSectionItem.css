@@ -1,0 +1,39 @@
+.vertical-multi-step-section-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 24px;
+    height: 100%;
+}
+
+.node {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+}
+
+.vertical-line {
+    width: 2px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.content {
+    padding-top: 3px;
+    width: 95%;
+    font-size: 14px;
+}
+
+.content-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.content-description {
+    margin-bottom: 8px;
+}
