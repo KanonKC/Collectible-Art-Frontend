@@ -34,7 +34,7 @@ const MajorTarotCardList = ({
 			{majorCards.map((number) => (
 				<TarotCard
 					key={number}
-					number={number}
+					cardNumber={number}
 					onClickTarotCard={onClickTarotCard}
 				/>
 			))}
