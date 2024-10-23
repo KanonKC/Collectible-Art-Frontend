@@ -4,10 +4,8 @@ import "./TarotCard.css";
 
 const TarotCard = ({
 	cardNumber,
-	onClickTarotCard,
 }: {
 	cardNumber: number;
-	onClickTarotCard: (cardNumber: number) => void;
 }) => {
 	return (
 		<TarotCardDialog cardNumber={cardNumber}>

@@ -1,12 +1,11 @@
 import React from "react";
 import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "../ui/dialog";
-import { Card, CardContent } from "../ui/card";
 
 const TarotCardDialog = ({
 	children,

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import TarotCard from "../TarotCard/TarotCard";
 import "./MajorTarotCardList.css";
 
@@ -9,20 +8,20 @@ const MajorTarotCardList = ({
 	startCardNumber: number;
 	endCardNumber: number;
 }) => {
-	const [audio, setAudio] = useState<HTMLAudioElement>(new Audio());
+	// const [audio, setAudio] = useState<HTMLAudioElement>(new Audio());
 
-	const onClickTarotCard = (number: number) => {
-		audio.pause();
-		setAudio(
-			new Audio(
-				`http://localhost:8082/public/sounds/tarot-voices/normalized/${number}.mp3`
-			)
-		);
-	};
+	// const onClickTarotCard = (number: number) => {
+	// 	audio.pause();
+	// 	setAudio(
+	// 		new Audio(
+	// 			`http://localhost:8082/public/sounds/tarot-voices/normalized/${number}.mp3`
+	// 		)
+	// 	);
+	// };
 
-	useEffect(() => {
-		audio.play();
-	}, [audio]);
+	// useEffect(() => {
+	// 	audio.play();
+	// }, [audio]);
 
 	const majorCards = Array.from(
 		{ length: endCardNumber + 1 },
@@ -35,7 +34,6 @@ const MajorTarotCardList = ({
 				<TarotCard
 					key={number}
 					cardNumber={number}
-					onClickTarotCard={onClickTarotCard}
 				/>
 			))}
 		</div>
