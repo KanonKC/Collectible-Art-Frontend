@@ -70,7 +70,6 @@
     }
     a {
         @apply text-primary;
-        text-decoration: underline
     }
 }
 
