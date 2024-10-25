@@ -158,3 +158,18 @@ export interface TwitchWebsocketSession {
         }
     }
 }
+
+export interface TwitchUsers {
+    data: {
+        id: string;
+        login: string;
+        display_name: string;
+        type: "staff" | "admin" | "global_mod" | "";
+        broadcaster_type: "partner" | "affiliate" | "";
+        description: string;
+        profile_image_url: string;
+        offline_image_url: string;
+        email: string;
+        created_at: string;
+    }[]
+}

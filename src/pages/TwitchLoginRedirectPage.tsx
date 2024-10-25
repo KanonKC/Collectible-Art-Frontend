@@ -1,5 +1,4 @@
-import { createOrUpdateAccount } from '@/service/Account.service';
-import { getUserLoginAccessToken } from '@/service/Twitch.service';
+import { getTwitchUserByAccessToken, getUserLoginAccessToken } from '@/service/Twitch.service';
 import { useEffect } from 'react';
 
 const TwitchLoginRedirectPage = () => {
@@ -10,20 +9,16 @@ const TwitchLoginRedirectPage = () => {
 
         if (code) {
             const authResponse = await getUserLoginAccessToken(code)
-            const userResponse = await createOrUpdateAccount(authResponse.data)
+            const userResponse = await getTwitchUserByAccessToken(authResponse.data.access_token)
 
-            const user = userResponse.data
+            const user = userResponse.data.data[0];
+            const tokenExpiresAt = new Date(new Date().getTime() + authResponse.data.expires_in * 1000)
 
-            if (!user.twitchAccessToken || !user.twitchRefreshToken || !user.twitchTokenExpiresAt) {
-                return;
-            }
-
-            localStorage.setItem('accountId', user.id)
-            localStorage.setItem('username', user.username)
-            localStorage.setItem('twitchId', user.twitchId)
-            localStorage.setItem('twitchAccessToken', user.twitchAccessToken)
-            localStorage.setItem('twitchRefreshToken', user.twitchRefreshToken)
-            localStorage.setItem('twitchTokenExpiresAt', new Date(user.twitchTokenExpiresAt).getTime().toString())
+            localStorage.setItem('username', user.display_name)
+            localStorage.setItem('twitchId', user.id)
+            localStorage.setItem('twitchAccessToken', authResponse.data.access_token)
+            localStorage.setItem('twitchRefreshToken', authResponse.data.refresh_token)
+            localStorage.setItem('twitchTokenExpiresAt', tokenExpiresAt.getTime().toString())
 
             window.location.href = '/'
 
