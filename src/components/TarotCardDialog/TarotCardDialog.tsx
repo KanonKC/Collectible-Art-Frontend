@@ -108,9 +108,13 @@ const TarotCardDialog = ({
 										<Button
                                             onClick={() => onClickPlaySound(sound, index)}
 											key={index}
-											variant={currentlyPlayingIndex === index ? "default" : "outline"}
+											variant="outline"
                                             className={cn({
                                                 "bg-secondary": !sound.isUnlocked,
+                                                "bg-primary": currentlyPlayingIndex === index,
+                                                "text-white": currentlyPlayingIndex === index,
+                                                "hover:bg-primary": currentlyPlayingIndex === index,
+                                                "hover:text-white": currentlyPlayingIndex === index,
                                             })}
 											disabled={!sound.isUnlocked}
 										>
