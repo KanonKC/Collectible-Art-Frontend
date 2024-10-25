@@ -1,0 +1,14 @@
+.voice-actor-profile {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 4px 16px 12px 16px;
+}
+
+.voice-actor-profile-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
