@@ -18,6 +18,7 @@ const tarotCardSlice = createSlice({
     reducers: {
         setMajorCards: (state: TarotCardState, action: PayloadAction<TarotCard[]>) => {
             state.majorCards = action.payload
+            localStorage.setItem('majorCard', JSON.stringify(action.payload))
         },
         setIsLoading: (state: TarotCardState, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload
@@ -42,7 +43,6 @@ export async function loadTarotCardsCollection(
     try {
         const response = await getTarotCardsCollection(accountId)
         dispatch({ type: 'tarotCard/setMajorCards', payload: response.data.majorCards })
-        dispatch({ type: 'tarotCard/saveMajorCardToLocalStorage' })
     } catch (error) {
         console.error(error)
         dispatch({ type: 'tarotCard/loadMajorCardFromLocalStorage' })

@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/stores/hooks";
 import TarotCardDialog from "../TarotCardDialog/TarotCardDialog";
 import { Card, CardContent } from "../ui/card";
 import "./TarotCard.css";
-import { useAppSelector } from "@/stores/hooks";
 
 const TarotCard = ({
 	cardNumber,

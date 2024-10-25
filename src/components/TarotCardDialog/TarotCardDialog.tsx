@@ -12,6 +12,7 @@ import {
 } from "../ui/dialog";
 import "./TarotCardDialog.css";
 import { TarotCardSoundProfile } from "@/types/TarotCard.type";
+import { Lock } from "lucide-react"
 
 const TarotCardDialog = ({
 	children,
@@ -63,7 +64,7 @@ const TarotCardDialog = ({
 				</DialogHeader>
 				<div className="flex">
 					<img
-						className="border-2 rounded-md mr-[32px]"
+						className="border-2 rounded-md mr-[32px] hidden md:block"
 						width={250}
 						src={`images/${cardNumber}.png`}
 					/>
@@ -102,7 +103,7 @@ const TarotCardDialog = ({
 									</a>
 								</div>
 
-								<div className="flex gap-[4px]">
+								<div className="grid grid-cols-3 gap-[4px] md:grid-cols-6">
 									{tarotCard?.sounds.map((sound, index) => (
 										<Button
                                             onClick={() => onClickPlaySound(sound, index)}
@@ -113,7 +114,7 @@ const TarotCardDialog = ({
                                             })}
 											disabled={!sound.isUnlocked}
 										>
-											{index + 1}
+											{sound.isUnlocked ? (<span>{index + 1}</span>) : <span><Lock size={14} /></span>}
 										</Button>
 									))}
 								</div>
