@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useAppSelector } from "@/stores/hooks";
+import { TarotCardSoundProfile } from "@/types/TarotCard.type";
+import { Lock, Volume2, VolumeX } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
@@ -10,11 +12,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "../ui/dialog";
-import "./TarotCardDialog.css";
-import { TarotCardSoundProfile } from "@/types/TarotCard.type";
-import { Lock, Speaker, Volume, Volume2 } from "lucide-react";
-import { Separator } from "../ui/separator";
 import { Slider } from "../ui/slider";
+import "./TarotCardDialog.css";
 
 const TarotCardDialog = ({
 	children,
@@ -28,7 +27,8 @@ const TarotCardDialog = ({
 	);
 
 	const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-    const [currentVolume, setCurrentVolume] = useState<number>(0.5);
+	const [currentVolume, setCurrentVolume] = useState<number>(0.5);
+	const [isMuted, setIsMuted] = useState<boolean>(false);
 	const [currentlyPlayingIndex, setCurrentPlayingIndex] =
 		useState<number>(-1);
 
@@ -52,17 +52,36 @@ const TarotCardDialog = ({
 		setCurrentPlayingIndex(-1);
 	};
 
+    const onVolumeChange = (e: number[]) => {
+        setCurrentVolume(e[0])
+        setIsMuted(false)
+    }
+
+	const onClickMute = () => {
+		setIsMuted(true);
+	};
+
+	const onClickUnmute = () => {
+		setIsMuted(false);
+	};
+
+	useEffect(() => {
+		if (audio) {
+			audio.muted = isMuted;
+		}
+	}, [isMuted, audio]);
+
 	useEffect(() => {
 		if (audio) {
 			audio.play();
 		}
 	}, [audio]);
 
-    useEffect(() => {
-        if (audio) {
-            audio.volume = currentVolume;
-        }
-    }, [currentVolume, audio]);
+	useEffect(() => {
+		if (audio) {
+			audio.volume = currentVolume;
+		}
+	}, [currentVolume, audio]);
 
 	return (
 		<Dialog onOpenChange={onDialogClose}>
@@ -132,10 +151,18 @@ const TarotCardDialog = ({
 											disabled={!sound.isUnlocked}
 										>
 											{sound.isUnlocked ? (
-												<span className={cn({
-                                                    "px-[3px]" : currentlyPlayingIndex === index,
-                                                    "px-[2px]" : currentlyPlayingIndex !== index,
-                                                })}>{index + 1}</span>
+												<span
+													className={cn({
+														"px-[3px]":
+															currentlyPlayingIndex ===
+															index,
+														"px-[2px]":
+															currentlyPlayingIndex !==
+															index,
+													})}
+												>
+													{index + 1}
+												</span>
 											) : (
 												<span>
 													<Lock size={14} />
@@ -143,18 +170,31 @@ const TarotCardDialog = ({
 											)}
 										</Button>
 									))}
-									<div className="w-[100px] flex gap-[4px] audio-tool-block">
-										<Volume2
-											className="text-gray-500"
-											size={18}
-										/>
-										<Slider
-											min={0}
-											max={1}
-                                            step={0.01}
-                                            onValueChange={(e) => setCurrentVolume(e[0])}
-											value={[currentVolume]}
-										/>
+									<div className="w-[150px] flex items-center gap-[4px] audio-tool-block">
+										<div className="cursor-pointer">
+											{currentVolume === 0 || isMuted ? (
+												<VolumeX
+													onClick={onClickUnmute}
+													className="text-gray-500"
+													size={18}
+												/>
+											) : (
+												<Volume2
+													onClick={onClickMute}
+													className="text-gray-500"
+													size={18}
+												/>
+											)}
+										</div>
+										<div className="w-[100%] cursor-pointer">
+											<Slider
+												min={0}
+												max={1}
+												step={0.01}
+												onValueChange={onVolumeChange}
+												value={[isMuted ? 0 : currentVolume]}
+											/>
+										</div>
 									</div>
 								</div>
 							</div>
