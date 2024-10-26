@@ -73,7 +73,8 @@ const TarotCardDialog = ({
 							<legend className="ml-[4px] px-[4px] font-bold text-sm ">
 								Voiced Actor
 							</legend>
-							<div className="voice-actor-profile-content">
+                            
+							<div className="voice-actor-profile-content flex-col md:flex-row">
 								<div>
 									<a
 										href={`https://twitch.tv/${tarotCard?.voiceActor.twitchLogin}`}
@@ -103,18 +104,14 @@ const TarotCardDialog = ({
 									</a>
 								</div>
 
-								<div className="grid grid-cols-3 gap-[4px] md:grid-cols-6">
+								<div className="flex gap-[4px] mt-[12px] justify-end md:mt-0">
 									{tarotCard?.sounds.map((sound, index) => (
 										<Button
                                             onClick={() => onClickPlaySound(sound, index)}
 											key={index}
-											variant="outline"
+											variant={currentlyPlayingIndex === index ? "default" : "outline"}
                                             className={cn({
                                                 "bg-secondary": !sound.isUnlocked,
-                                                "bg-primary": currentlyPlayingIndex === index,
-                                                "text-white": currentlyPlayingIndex === index,
-                                                "hover:bg-primary": currentlyPlayingIndex === index,
-                                                "hover:text-white": currentlyPlayingIndex === index,
                                             })}
 											disabled={!sound.isUnlocked}
 										>
