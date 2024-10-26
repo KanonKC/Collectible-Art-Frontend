@@ -52,10 +52,10 @@ const TarotCardDialog = ({
 		setCurrentPlayingIndex(-1);
 	};
 
-    const onVolumeChange = (e: number[]) => {
-        setCurrentVolume(e[0])
-        setIsMuted(false)
-    }
+	const onVolumeChange = (e: number[]) => {
+		setCurrentVolume(e[0]);
+		setIsMuted(false);
+	};
 
 	const onClickMute = () => {
 		setIsMuted(true);
@@ -102,7 +102,9 @@ const TarotCardDialog = ({
 								Voiced Actor
 							</legend>
 
-							<div className="voice-actor-profile-content flex-col md:flex-row">
+							<div
+								className={`voice-actor-profile-content flex-col md:flex-row`}
+							>
 								<div>
 									<a
 										href={`https://twitch.tv/${tarotCard?.voiceActor.twitchLogin}`}
@@ -122,7 +124,12 @@ const TarotCardDialog = ({
 													}
 												</AvatarFallback>
 											</Avatar>
-											<b>
+											<b
+												style={{
+													color: tarotCard?.voiceActor
+														.color,
+												}}
+											>
 												{
 													tarotCard?.voiceActor
 														.displayName
@@ -139,6 +146,16 @@ const TarotCardDialog = ({
 												onClickPlaySound(sound, index)
 											}
 											key={index}
+											style={
+												currentlyPlayingIndex === index
+													? {
+															backgroundColor:
+																tarotCard
+																	?.voiceActor
+																	.color,
+													  }
+													: {}
+											}
 											variant={
 												currentlyPlayingIndex === index
 													? "default"
@@ -188,11 +205,22 @@ const TarotCardDialog = ({
 										</div>
 										<div className="w-[100%] cursor-pointer">
 											<Slider
+                                                rangeStyle={{
+                                                    backgroundColor: tarotCard?.voiceActor.color ?? "",
+                                                }}
+                                                trackStyle={{
+                                                    backgroundColor: "#e0e0e0",
+                                                }}
+                                                thumbStyle={{
+                                                    borderColor: tarotCard?.voiceActor.color ?? "",
+                                                }}
 												min={0}
 												max={1}
 												step={0.01}
 												onValueChange={onVolumeChange}
-												value={[isMuted ? 0 : currentVolume]}
+												value={[
+													isMuted ? 0 : currentVolume,
+												]}
 											/>
 										</div>
 									</div>

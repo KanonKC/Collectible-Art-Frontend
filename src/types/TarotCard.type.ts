@@ -3,6 +3,7 @@ export interface TarotCardVoiceActor {
     displayName: string;
     profileUrl: string;
     youtube: string | null;
+    color: string;
 }
 
 export interface TarotCardSoundProfile {
