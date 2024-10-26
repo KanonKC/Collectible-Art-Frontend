@@ -19,9 +19,11 @@ const TarotCardCollections = () => {
 
 	return (
 		<Navbar>
-			<div className="w-[60%] mx-auto mt-[32px]">
-				<MajorTarotCardListCarousel />
-			</div>
+			<div className="flex justify-center items-center md:h-[85vh]">
+                <div className="max-w-[70%] min-w-[50%]">
+                    <MajorTarotCardListCarousel />
+                </div>
+            </div>
 		</Navbar>
 	);
 };

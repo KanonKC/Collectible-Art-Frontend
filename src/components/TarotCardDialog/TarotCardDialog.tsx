@@ -98,7 +98,7 @@ const TarotCardDialog = ({
 					/>
 					<div className="w-[100%]">
 						<fieldset className="voice-actor-profile">
-							<legend className="ml-[4px] px-[4px] font-bold text-sm ">
+							<legend className="mx-auto md:ml-[4px] px-[4px] font-bold text-sm ">
 								Voiced Actor
 							</legend>
 
@@ -187,7 +187,7 @@ const TarotCardDialog = ({
 											)}
 										</Button>
 									))}
-									<div className="w-[150px] flex items-center gap-[4px] audio-tool-block">
+									<div className="hidden md:block w-[150px] flex items-center gap-[4px] audio-tool-block">
 										<div className="cursor-pointer">
 											{currentVolume === 0 || isMuted ? (
 												<VolumeX
@@ -205,15 +205,19 @@ const TarotCardDialog = ({
 										</div>
 										<div className="w-[100%] cursor-pointer">
 											<Slider
-                                                rangeStyle={{
-                                                    backgroundColor: tarotCard?.voiceActor.color ?? "",
-                                                }}
-                                                trackStyle={{
-                                                    backgroundColor: "#e0e0e0",
-                                                }}
-                                                thumbStyle={{
-                                                    borderColor: tarotCard?.voiceActor.color ?? "",
-                                                }}
+												rangeStyle={{
+													backgroundColor:
+														tarotCard?.voiceActor
+															.color ?? "",
+												}}
+												trackStyle={{
+													backgroundColor: "#e0e0e0",
+												}}
+												thumbStyle={{
+													borderColor:
+														tarotCard?.voiceActor
+															.color ?? "",
+												}}
 												min={0}
 												max={1}
 												step={0.01}
@@ -227,7 +231,9 @@ const TarotCardDialog = ({
 								</div>
 							</div>
 						</fieldset>
-						<p className="mt-[16px]">{tarotCard?.description}</p>
+						<p className="mt-[16px] italic">
+							{tarotCard?.description}
+						</p>
 					</div>
 				</div>
 			</DialogContent>
