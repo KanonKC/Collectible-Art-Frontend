@@ -1,5 +1,5 @@
 .voice-actor-profile {
-    display: flex;
+    /* display: flex; */
     gap: 8px;
     align-items: center;
     border: 1px solid #e0e0e0;
@@ -11,4 +11,11 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
+}
+
+.audio-tool-block {
+    border-left: 1px solid #e0e0e0;
+    padding: 8px 0 8px 8px;
+    margin-left: 4px;
 }

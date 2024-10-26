@@ -5,26 +5,7 @@ const MajorTarotCardListCarousel = () => {
   return (
     <div>
         <div className="block md:hidden">
-            <Carousel>
-                <CarouselContent>
-                    <CarouselItem>
-                        <MajorTarotCardList startCardNumber={0} endCardNumber={21}/>
-                    </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious/>
-                <CarouselNext/>
-            </Carousel>
-        </div>
-        <div className="hidden sm:block md:hidden">
-            <Carousel>
-                <CarouselContent>
-                    <CarouselItem>
-                        <MajorTarotCardList startCardNumber={0} endCardNumber={21}/>
-                    </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious/>
-                <CarouselNext/>
-            </Carousel>
+            <MajorTarotCardList startCardNumber={0} endCardNumber={21}/>
         </div>
         <div className="hidden md:block lg:hidden">
             <Carousel>

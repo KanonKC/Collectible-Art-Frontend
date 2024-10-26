@@ -8,8 +8,8 @@
 }
 
 .tarot-card-shadow-box {
-    width: 100%;
-    height: 100%;
+    width: 101%;
+    height: 101%;
     background-color: black;
     border-radius: 8px;
     cursor: pointer;

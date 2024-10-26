@@ -7,13 +7,13 @@ import { store } from './stores'
 function App() {
 
   return (
-    <>
+    <div>
         <Provider store={store}>
             <BrowserRouter>
                 <Router />
             </BrowserRouter>
         </Provider>
-    </>
+    </div>
   )
 }
 
