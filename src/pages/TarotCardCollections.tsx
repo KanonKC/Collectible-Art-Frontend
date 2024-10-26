@@ -19,7 +19,7 @@ const TarotCardCollections = () => {
 
 	return (
 		<Navbar>
-			<div className="flex justify-center items-center md:h-[94vh]">
+			<div className="flex justify-center items-center md:h-[90vh]">
                 <div className="max-w-[70%] min-w-[50%]">
                     <MajorTarotCardListCarousel />
                 </div>
