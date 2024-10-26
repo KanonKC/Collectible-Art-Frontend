@@ -27,7 +27,7 @@ const TarotCardDialog = ({
 	);
 
 	const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-	const [currentVolume, setCurrentVolume] = useState<number>(0.5);
+	const [currentVolume, setCurrentVolume] = useState<number>(1);
 	const [isMuted, setIsMuted] = useState<boolean>(false);
 	const [currentlyPlayingIndex, setCurrentPlayingIndex] =
 		useState<number>(-1);
@@ -187,7 +187,7 @@ const TarotCardDialog = ({
 											)}
 										</Button>
 									))}
-									<div className="hidden md:block w-[150px] flex items-center gap-[4px] audio-tool-block">
+									<div className="hidden md:flex w-[150px] flex items-center gap-[4px] audio-tool-block">
 										<div className="cursor-pointer">
 											{currentVolume === 0 || isMuted ? (
 												<VolumeX
