@@ -5,6 +5,7 @@ import TwitchLoginRedirectPage from "./pages/TwitchLoginRedirectPage";
 import { useAppDispatch, useAppSelector } from "./stores/hooks";
 import { useEffect } from "react";
 import PixelArtPage from "./pages/PixelArtPage/PixelArtPage";
+import MathGamePage from "./pages/MathGamePage/MathGamePage";
 
 const Router = () => {
 	
@@ -30,6 +31,10 @@ const Router = () => {
 			<Route
 				path="/pixel-art"
 				element={<PixelArtPage />}
+			/>
+			<Route
+				path="/math-game"
+				element={<MathGamePage />}
 			/>
 		</Routes>
 	);
