@@ -1,9 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import TarotCardCollections from "./pages/TarotCardCollections";
+import TarotCardCollections from "./pages/TarotCardCollections/TarotCardCollections";
 import TwitchLoginRedirectPage from "./pages/TwitchLoginRedirectPage";
 import { useAppDispatch, useAppSelector } from "./stores/hooks";
 import { useEffect } from "react";
+import PixelArtPage from "./pages/PixelArtPage/PixelArtPage";
+import MathGamePage from "./pages/MathGamePage/MathGamePage";
 
 const Router = () => {
 	
@@ -25,6 +27,14 @@ const Router = () => {
 			<Route
 				path="/tarot-card-collections"
 				element={<TarotCardCollections />}
+			/>
+			<Route
+				path="/pixel-art"
+				element={<PixelArtPage />}
+			/>
+			<Route
+				path="/math-game"
+				element={<MathGamePage />}
 			/>
 		</Routes>
 	);
