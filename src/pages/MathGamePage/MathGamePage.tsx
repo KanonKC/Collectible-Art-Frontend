@@ -7,8 +7,15 @@ import { createMathGame } from "@/utils/createMathGame";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight, RotateCw } from "lucide-react";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+    DialogTitle,
+} from "@/components/ui/dialog";
 
 const MathGamePage = () => {
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
 	const [score, setScore] = useState(0);
 	const [totalAttmpets, setTotalAttempts] = useState(0);
 	const [expression, setExpression] = useState("");
@@ -37,8 +44,10 @@ const MathGamePage = () => {
 			createGame();
 		} else {
 			setCurrentState("incorrect");
-			console.log("Wrong answer");
-		}
+            if (Math.random() < 0.25) {
+                setIsOpenDialog(true);
+            }
+        }
 		setInputValue("");
 		setTotalAttempts(totalAttmpets + 1);
 		setTimeout(() => {
@@ -52,6 +61,19 @@ const MathGamePage = () => {
 
 	return (
 		<Navbar>
+			<Dialog open={isOpenDialog}>
+				<DialogContent onClick={() => setIsOpenDialog(false)}>
+                    <DialogTitle>
+                        ดูรูปชีสเค้กเสริมพลัง เพื่อการคิดเลขที่ถูกต้องมากขึ้น
+                    </DialogTitle>
+					<DialogDescription>
+						<img
+							src="https://img2.pic.in.th/pic/20241110_131427.jpg"
+							alt="cheesecake"
+						/>
+					</DialogDescription>
+				</DialogContent>
+			</Dialog>
 			<div className="mt-[30vh]">
 				<div className="flex justify-center">
 					<Card
@@ -66,7 +88,6 @@ const MathGamePage = () => {
 					>
 						<div className="flex justify-between my-[4px] text-sm text-neutral-500">
 							<div>Score: {score}</div>
-							
 						</div>
 						<div className="my-[32px] text-center text-4xl">
 							{expression}
