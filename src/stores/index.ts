@@ -3,13 +3,15 @@ import counterReducer from './slices/counterSlice'
 import accountReducer from './slices/accountSlice'
 import shoutoutWithClipReducer from './slices/shoutoutWithClipSlice'
 import tarotCardReducer from './slices/tarotCardSlice'
+import pixelArtReducer from './slices/pixelArtSlice'
 
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
         account: accountReducer,
         shoutoutWithClip: shoutoutWithClipReducer,
-        tarotCard: tarotCardReducer
+        tarotCard: tarotCardReducer,
+        pixelArt: pixelArtReducer,
     }
 })
 
