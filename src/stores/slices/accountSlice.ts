@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { getCustomPoint } from "@/service/CustomPoint.service";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface AccountState {
     accountId: string | null;
@@ -7,6 +8,7 @@ export interface AccountState {
     accessToken: string | null
     refreshToken: string | null
     twitchTokenExpiresAt: number | null
+    customPoint: number;
 }
 
 const initialState: AccountState = {
@@ -15,8 +17,21 @@ const initialState: AccountState = {
     twitchId: null,
     accessToken: null,
     refreshToken: null,
-    twitchTokenExpiresAt: null
+    twitchTokenExpiresAt: null,
+    customPoint: 0,
 }
+
+export const loadAccount = createAsyncThunk(
+    "account/loadAccount",
+    async (_, { getState }) => {
+        console.log("CALL")
+        const state = getState() as { account: AccountState }
+
+        const {data: customPoint} = await getCustomPoint(state.account.twitchId!)
+        console.log("LOAD",customPoint)
+        return customPoint
+    }
+)
 
 export const accountSlice = createSlice({
     name: 'account',
@@ -62,6 +77,14 @@ export const accountSlice = createSlice({
             localStorage.removeItem('twitchRefreshToken')
             localStorage.removeItem('twitchTokenExpiresAt')
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(loadAccount.pending, () => {
+            console.log("pending")
+        });
+        builder.addCase(loadAccount.fulfilled, (state, action) => {
+			state.customPoint = action.payload.point
+		});
     }
 })
 
