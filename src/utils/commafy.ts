@@ -1,4 +1,4 @@
-export function commafy(num: number) {
+export function commafy(num: number | string) {
 	if (num) {
 		return num.toLocaleString();
 	}

@@ -3,6 +3,7 @@ import { Card } from "../ui/card";
 import ChannelPointRedeemCardItem from "./ChannelPointRedeemCardItem/ChannelPointRedeemCardItem";
 import { useEffect, useMemo, useState } from "react";
 import { useAppSelector } from "@/stores/hooks";
+import { LoaderCircle } from "lucide-react";
 
 const ChannelPointRedeemCard = ({
 	redeemablePointAmount,
@@ -10,6 +11,7 @@ const ChannelPointRedeemCard = ({
 	redeemablePointAmount: number;
 }) => {
 	const account = useAppSelector((state) => state.account);
+	const [isLoading, setIsLoading] = useState(true);
 	const redeemFactorList = useMemo(() => [0.1, 0.25, 0.5, 1.0], []);
 	const redeemFactoredValueList = useMemo(
 		() => redeemFactorList.map((factor) => factor * redeemablePointAmount),
@@ -23,6 +25,7 @@ const ChannelPointRedeemCard = ({
 	useEffect(() => {
 		if (!account.twitchId) return;
 
+		setIsLoading(true);
 		getRedeemableChannelPointAmountList(
 			account.twitchId,
 			redeemFactoredValueList
@@ -31,17 +34,27 @@ const ChannelPointRedeemCard = ({
 			setRedeemableFixedList(
 				data.amountList
 					.filter(
-						(amount,index,array) =>
+						(amount, index, array) =>
 							amount.possibleAmount <= account.customPoint &&
 							amount.possibleAmount > 0 &&
-                            array.indexOf(amount) === index
+							array.indexOf(amount) === index
 					)
 					.map((amount) => amount.possibleAmount)
 			);
+			setIsLoading(false);
 		});
 	}, [account, redeemFactoredValueList]);
 
-	return redeemableFixedList.length > 0 ? (
+	return isLoading ? (
+		<div>
+			<div className="flex justify-center">
+				<div>
+					<LoaderCircle className="animate-spin text-primary" />{" "}
+				</div>
+				<div className="pl-1">Loading data ...</div>
+			</div>
+		</div>
+	) : redeemableFixedList.length > 0 ? (
 		<Card className="px-4">
 			{redeemableFixedList.map((amount, index) => (
 				<>

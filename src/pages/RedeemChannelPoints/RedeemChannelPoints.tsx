@@ -3,17 +3,24 @@ import { Card } from "@/components/ui/card";
 import Navbar from "@/layouts/Navbar/Navbar";
 import { getRedeemableChannelPointAmount } from "@/service/ChannelPointRedeem.service";
 import { useAppSelector } from "@/stores/hooks";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
 const RedeemChannelPoints = () => {
 	const account = useAppSelector((state) => state.account);
 	const [redeemablePointAmount, setRedeemablePointAmount] =
 		useState<number>(0);
+	const possibleRedeemablePointAmount = useMemo(
+		() =>
+			redeemablePointAmount > account.customPoint
+				? account.customPoint
+				: redeemablePointAmount,
+		[account.customPoint, redeemablePointAmount]
+	);
 
 	const [springs, api] = useSpring(() => ({
 		from: {
-			redeemablePointAmount: 0,
+			possibleRedeemablePointAmount: 0,
 			customPoint: 0,
 		},
 		config: {
@@ -38,10 +45,10 @@ const RedeemChannelPoints = () => {
 	useEffect(() => {
 		api.start({
 			to: {
-				redeemablePointAmount: redeemablePointAmount,
+				possibleRedeemablePointAmount: possibleRedeemablePointAmount,
 			},
 		});
-	}, [redeemablePointAmount, api]);
+	}, [possibleRedeemablePointAmount, api]);
 
 	useEffect(() => {
 		api.start({
@@ -50,12 +57,6 @@ const RedeemChannelPoints = () => {
 			},
 		});
 	}, [api, account.customPoint]);
-
-	useEffect(() => {
-		if (redeemablePointAmount > account.customPoint) {
-			setRedeemablePointAmount(account.customPoint);
-		}
-	}, [redeemablePointAmount, account.customPoint]);
 
 	return (
 		<Navbar>
@@ -66,7 +67,7 @@ const RedeemChannelPoints = () => {
 							<div className="text-center">
 								<div className="text-4xl font-bold">
 									แต้ม Refresh Token ที่มี{" "}
-									<animated.span>
+									<animated.span className="text-primary">
 										{springs.customPoint.to((n) =>
 											n.toFixed(0)
 										)}
@@ -74,9 +75,9 @@ const RedeemChannelPoints = () => {
 								</div>
 								<div className="mt-1">
 									แต้มที่สามารถแลกกลับไปเป็นแต้มช่องได้{" "}
-									<animated.span>
-										{springs.redeemablePointAmount.to((n) =>
-											n.toFixed(0)
+									<animated.span className="text-primary">
+										{springs.possibleRedeemablePointAmount.to(
+											(n) => n.toFixed(0)
 										)}
 									</animated.span>
 								</div>
@@ -84,7 +85,7 @@ const RedeemChannelPoints = () => {
 							<div className="mt-16 ">
 								<ChannelPointRedeemCard
 									redeemablePointAmount={
-										redeemablePointAmount
+										possibleRedeemablePointAmount
 									}
 								/>
 							</div>
