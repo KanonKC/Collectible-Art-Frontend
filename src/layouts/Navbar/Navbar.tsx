@@ -6,6 +6,8 @@ import { Separator } from "../../components/ui/separator";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import NavbarMenuText from "./NavbarMenuText/NavbarMenuText";
+import { DatabaseBackup } from "lucide-react";
+import { loadAccount } from "@/stores/slices/accountSlice";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
 	const account = useAppSelector((state) => state.account);
@@ -24,6 +26,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	useEffect(() => {
+        dispatch(loadAccount());
 		dispatch({ type: "account/loadAccountFromLocalStorage" });
 
 		if (
@@ -54,11 +57,24 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 						{!isLoggedIn ? (
 							<LoginTwitchButton />
 						) : (
-							<div>
-								<span className="pr-2">{account.username}</span>
-								<Button onClick={handleOnClickLogoutButton}>
-									Logout
-								</Button>
+							<div className="flex items-center gap-2">
+								<div
+									onClick={() =>
+										navigate("/redeem-channel-points")
+									}
+									className="flex gap-1 hover:text-primary cursor-pointer pr-4"
+								>
+									<span>
+										<DatabaseBackup />
+									</span>
+									<span>{account.customPoint}</span>
+								</div>
+								<div className="pr-2">{account.username}</div>
+								<div>
+									<Button onClick={handleOnClickLogoutButton}>
+										Logout
+									</Button>
+								</div>
 							</div>
 						)}
 					</div>
