@@ -14,7 +14,7 @@ const TarotCardCounterCard = () => {
 			<div className="hidden md:block">
 				<Card className="p-4 flex flex-col gap-2">
                     <CardTitle>Progression</CardTitle>
-					<div className="w-[250px]">
+					<div className="w-[225px]">
 						<TarotCardCounterCardContent />
 					</div>
 				</Card>
