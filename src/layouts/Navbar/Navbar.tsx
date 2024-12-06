@@ -5,6 +5,7 @@ import { Button } from "../../components/ui/button";
 import { Separator } from "../../components/ui/separator";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import NavbarMenuText from "./NavbarMenuText/NavbarMenuText";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
 	const account = useAppSelector((state) => state.account);
@@ -38,22 +39,16 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 		<div>
 			<div className="top-navbar">
 				<div className="top-navbar-content">
-					<div className="flex gap-[px] items-center">
-						<div className="font-bold cursor-pointer px-[16px] py-[4px] border-r-2">
-							COLLECTIBLE ART
-						</div>
-						<div
+					<div className="gap-[px] items-center hidden sm:flex">
+						<NavbarMenuText>COLLECTIBLE ART</NavbarMenuText>
+						<NavbarMenuText
 							onClick={() => navigate("/tarot-card-collections")}
-							className="font-bold cursor-pointer px-[16px] py-[4px] border-r-2 hover:text-primary"
 						>
 							TAROT CARD COLLECTIONS
-						</div>
-						<div
-							onClick={() => navigate("/math-game")}
-							className="font-bold cursor-pointer px-[16px] py-[4px] border-r-2 hover:text-primary"
-						>
+						</NavbarMenuText>
+						<NavbarMenuText onClick={() => navigate("/math-game")}>
 							MATH GAME
-						</div>
+						</NavbarMenuText>
 					</div>
 					<div>
 						{!isLoggedIn ? (
