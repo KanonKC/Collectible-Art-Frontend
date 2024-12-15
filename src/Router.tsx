@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import PixelArtPage from "./pages/PixelArtPage/PixelArtPage";
 import MathGamePage from "./pages/MathGamePage/MathGamePage";
 import RedeemChannelPoints from "./pages/RedeemChannelPoints/RedeemChannelPoints";
+import LeaderboardsPage from "./pages/LeaderboardsPage/LeaderboardsPage";
 
 const Router = () => {
 	const dispatch = useAppDispatch();
@@ -37,6 +38,10 @@ const Router = () => {
 				path="/redeem-channel-points"
 				element={<RedeemChannelPoints />}
 			/>
+            <Route
+                path="/leaderboards"
+                element={<LeaderboardsPage />}
+            />
 		</Routes>
 	);
 };

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import NavbarMenuText from "./NavbarMenuText/NavbarMenuText";
 import { DatabaseBackup } from "lucide-react";
 import { loadAccount } from "@/stores/slices/accountSlice";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
 	const account = useAppSelector((state) => state.account);
@@ -26,7 +27,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	useEffect(() => {
-        dispatch(loadAccount());
+		dispatch(loadAccount());
 		dispatch({ type: "account/loadAccountFromLocalStorage" });
 
 		if (
@@ -42,15 +43,20 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 		<div>
 			<div className="top-navbar">
 				<div className="top-navbar-content">
-					<div className="gap-[px] items-center hidden sm:flex">
-						<NavbarMenuText>COLLECTIBLE ART</NavbarMenuText>
+					<div className="gap-[px] items-center hidden lg:flex">
+						<NavbarMenuText>
+                            <a className="text-black" href="https://twitch.tv/kanonkc">TWITCH</a>
+                        </NavbarMenuText>
 						<NavbarMenuText
 							onClick={() => navigate("/tarot-card-collections")}
 						>
 							TAROT CARD COLLECTIONS
 						</NavbarMenuText>
-						<NavbarMenuText onClick={() => navigate("/math-game")}>
+						{/* <NavbarMenuText onClick={() => navigate("/math-game")}>
 							MATH GAME
+						</NavbarMenuText> */}
+						<NavbarMenuText onClick={() => navigate("/leaderboards")}>
+							LEADERBOARDS
 						</NavbarMenuText>
 					</div>
 					<div>
@@ -69,6 +75,16 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 									</span>
 									<span>{account.customPoint}</span>
 								</div>
+								<Avatar>
+									{account.imageUrl && (
+										<AvatarImage src={account.imageUrl} />
+									)}
+									{account.username && (
+										<AvatarFallback>
+											{account.username[0].toUpperCase()}
+										</AvatarFallback>
+									)}
+								</Avatar>
 								<div className="pr-2">{account.username}</div>
 								<div>
 									<Button onClick={handleOnClickLogoutButton}>
