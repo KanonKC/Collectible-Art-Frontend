@@ -16,8 +16,7 @@ const ChannelPointRedeemCardItem = ({ amount }: { amount: number }) => {
         if (!account.twitchId) return
 
         setIsLoading(true)
-        const response = await redeemChannelPointFromCustomPoint(account.twitchId, amount)
-        console.log(response.data)
+        await redeemChannelPointFromCustomPoint(account.twitchId, amount)
         dispatch(loadAccount())
         setIsLoading(false)
     }

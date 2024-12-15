@@ -1,7 +1,10 @@
 import { getTwitchUserByAccessToken, getUserLoginAccessToken } from '@/service/Twitch.service';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TwitchLoginRedirectPage = () => {
+
+    const navigate = useNavigate()
 
     const twitchAuthorize = async () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -16,11 +19,13 @@ const TwitchLoginRedirectPage = () => {
 
             localStorage.setItem('username', user.display_name)
             localStorage.setItem('twitchId', user.id)
+            localStorage.setItem('twitchImageUrl', user.profile_image_url)
             localStorage.setItem('twitchAccessToken', authResponse.data.access_token)
             localStorage.setItem('twitchRefreshToken', authResponse.data.refresh_token)
             localStorage.setItem('twitchTokenExpiresAt', tokenExpiresAt.getTime().toString())
 
-            window.location.href = '/'
+            // window.location.href = '/'
+            navigate(-1)
 
         }
     }
