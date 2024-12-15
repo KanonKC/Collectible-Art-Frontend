@@ -28,13 +28,11 @@ const initialState: AccountState = {
 export const loadAccount = createAsyncThunk(
 	"account/loadAccount",
 	async (_, { getState }) => {
-		console.log("CALL");
 		const state = getState() as { account: AccountState };
 
 		const { data: customPoint } = await getCustomPoint(
 			state.account.twitchId!
 		);
-		console.log("LOAD", customPoint);
 		return customPoint;
 	}
 );
@@ -99,7 +97,7 @@ export const accountSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(loadAccount.pending, () => {
-			console.log("pending");
+			//
 		});
 		builder.addCase(loadAccount.fulfilled, (state, action) => {
             if (action.payload) {

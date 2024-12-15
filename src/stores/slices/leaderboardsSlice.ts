@@ -86,7 +86,6 @@ export const loadLeaderboards = createAsyncThunk(
 			startPeroid: state.isDisplayAllTime ? undefined : startTimestamp,
 			endPeroid: state.isDisplayAllTime ? undefined : endTimestamp,
 		});
-		console.log("response", response.data);
 		return response.data;
 	}
 );
@@ -166,7 +165,6 @@ export const leaderboardsSlice = createSlice({
 			state.isLoading = true;
 		});
 		builder.addMatcher(() => true, (state) => {
-            console.log("state", state.currentPage, state.totalPage);
 			state.isFirstPage = state.currentPage === 1;
 			state.isLastPage = state.currentPage === state.totalPage;
 		});
